@@ -11,14 +11,16 @@ import java.util.regex.Pattern;
  *
  */
 public class Consts {
-	private static final String SEGMENT = "[\\w\\$&&[^0-9]][\\w\\$]*";
-	public static final Pattern JAVA_PACKAGE_PTN = Pattern.compile(SEGMENT+"([\\.]"+SEGMENT+")*");
+	public static final String PACKAGE_SEGMENT_REGEX = "[\\w\\$&&[^0-9]][\\w\\$]*";
+	public static final String PACKAGE_REGEX = PACKAGE_SEGMENT_REGEX+"([\\.]"+PACKAGE_SEGMENT_REGEX+")*";
+	
+	public static final Pattern JAVA_PACKAGE_PTN = Pattern.compile(PACKAGE_REGEX);
 	
 	public static void main(String[] args){
 		String testPackage;
 		Matcher ma  = null;
 		
-		Pattern ptn = Pattern.compile(SEGMENT);
+		Pattern ptn = Pattern.compile(PACKAGE_SEGMENT_REGEX);
 		
 		ma = ptn.matcher(testPackage = "");
 		System.out.println("SEGMENT has a match? "+testPackage+" : " + ma.matches());
